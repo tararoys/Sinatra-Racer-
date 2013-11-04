@@ -26,3 +26,21 @@ end
 get '/games/:game_id' do
   erb :game
 end 
+
+put '/games/:game_id' do 
+  #update game with winner 
+  thegame = Game.find(params[:game_id])
+
+  #stinky code to add new player have to modify twelve places in code.  
+  winner = "?"
+  if params[:winner] == "player2"
+    winner = thegame.player2
+  else
+    winner = thegame.player1
+  end
+
+  thegame.winner = winner
+  thegame.save 
+
+  200 
+end

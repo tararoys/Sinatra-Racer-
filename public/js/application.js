@@ -6,14 +6,15 @@ $(document).ready(function() {
   var game = 'running';
   var winner = 'nobody_yet';
 
-  $("#new_game").on('click', function(){
-    game = 'running';
-    winner = 'nobody_yet';
-    $('td').removeClass('active');
-    $('#player1_strip td').first().addClass('active');
-    $('#player2_strip td').first().addClass('active');
-    $('#game_over').css("visibility", "hidden");
-  });
+  // $("#new_game").on('click', function(){
+  //   game = 'running';
+  //   winner = 'nobody_yet';
+  //   $('td').removeClass('active');
+  //   $('#player1_strip td').first().addClass('active');
+  //   $('#player2_strip td').first().addClass('active');
+  //   $('#game_over').css("visibility", "hidden");
+  //   $.get("/games/new");
+  // });
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   $(document).on('keyup', function(event) {
@@ -32,17 +33,21 @@ $(document).ready(function() {
 
     if ( somebodyWon() ){
       game = 'over';
+
+      $.post(window.location.pathname, {winner: winner, _method: "put"});
+
       $('#game_over').css("visibility", "visible");
+
     }
   }
 
   function somebodyWon(){
     if ( $('#player1_strip td').last().hasClass('active')){
-      declareWinner('blue');
+      declareWinner('player1');
       return true;
     }
     else if ( $('#player2_strip td').last().hasClass('active') ) {
-      declareWinner('red');
+      declareWinner('player2');
       return true;
     }
     return false;
