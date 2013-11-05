@@ -52,9 +52,9 @@ $(document).ready(function() {
   });
 
   function raceTheCars(event){
-    for (i = 0; i < players.length; i++){
+    for (var i = 0; i < players.length; i++){
       if(event.keyCode === players[i].key){
-        jquery_selector = '#player' + (i + 1) +'_strip td.active';
+        jquery_selector = '#player' + (i + 1) +'_strip td.active'; 
         console.log(jquery_selector);
         $(jquery_selector).next().addClass('active');
       }
@@ -71,13 +71,13 @@ $(document).ready(function() {
   }
 
   function somebodyWon(){
-    if ( $('#player1_strip td').last().hasClass('active')){
-      declareWinner('player1');
+
+    for (var i=0; i < players.length; i++){
+      jquery_selector = '#player' + (i + 1) +'_strip td';
+      if ( $(jquery_selector).last().hasClass('active')){
+        declareWinner('player1');
       return true;
-    }
-    else if ( $('#player2_strip td').last().hasClass('active') ) {
-      declareWinner('player2');
-      return true;
+      }
     }
     return false;
   }
