@@ -32,6 +32,9 @@ $(document).ready(function() {
   player1 = new Player(QueryString.player1, 65);
   player2 = new Player(QueryString.player2, 76);
 
+
+  players = [player1, player2];
+
   function Game (){
     this.state = 'running';
     this.winner = 'nobody_yet';
@@ -42,10 +45,6 @@ $(document).ready(function() {
     this.key = key_to_press; 
   }
 
-
-
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   $(document).on('keyup', function(event) {
     if (current_game.state === 'running'){
       raceTheCars(event);
@@ -53,12 +52,13 @@ $(document).ready(function() {
   });
 
   function raceTheCars(event){
-    if (event.keyCode === player1.key){
-      $('#player1_strip td.active').next().addClass('active');
+    for (i = 0; i < players.length; i++){
+      if(event.keyCode === players[i].key){
+        jquery_selector = '#player' + (i + 1) +'_strip td.active';
+        console.log(jquery_selector);
+        $(jquery_selector).next().addClass('active');
+      }
     }
-    else if (event.keyCode === player2.key){
-      $('#player2_strip td.active').next().addClass('active');
-    };
 
     if ( somebodyWon() ){
       current_game.state = 'over';
