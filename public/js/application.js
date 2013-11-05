@@ -3,8 +3,18 @@ $(document).ready(function() {
   // This guarantees that any elements we bind to will exist on the page
   // when we try to bind to them
 
-  var game = 'running';
-  var winner = 'nobody_yet';
+  current_game = new Game()
+
+  function Game (){
+    this.state = 'running';
+    this.winner = 'nobody_yet';
+  }
+
+
+  //var game = 'running';
+  //var winner = 'nobody_yet';
+
+
 
   // $("#new_game").on('click', function(){
   //   game = 'running';
@@ -18,7 +28,7 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   $(document).on('keyup', function(event) {
-    if (game === 'running'){
+    if (current_game.state === 'running'){
       raceTheCars(event);
     }
   });
@@ -32,9 +42,9 @@ $(document).ready(function() {
     };
 
     if ( somebodyWon() ){
-      game = 'over';
+      current_game.state = 'over';
 
-      $.post(window.location.pathname, {winner: winner, _method: "put"});
+      $.post(window.location.pathname, {winner: current_game.winner, _method: "put"});
 
       $('#game_over').css("visibility", "visible");
 
@@ -54,7 +64,7 @@ $(document).ready(function() {
   }
 
   function declareWinner(the_winner){
-    winner = the_winner;
+    current_game.winner = the_winner;
   }
 
 });
