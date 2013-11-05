@@ -1,9 +1,8 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+ 
 
   var QueryString = function () {
+  //there has to be a better way to get variables than this.  Maybe have a gets request return some json. 
   // This function is anonymous, is executed immediately and 
   // the return value is assigned to QueryString!
   var query_string = {};
@@ -26,12 +25,20 @@ $(document).ready(function() {
     return query_string;
 } ();
 
-  console.log(QueryString);
+  console.log(QueryString.player1);
+  console.log(QueryString.player2);
+
   current_game = new Game()
+  player1 = new Player(QueryString.player1);
+  player2 = new Player(QueryString.player2);
 
   function Game (){
     this.state = 'running';
     this.winner = 'nobody_yet';
+  }
+
+  function Player(name){
+    this.name = name;
   }
 
 
