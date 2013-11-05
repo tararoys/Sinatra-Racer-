@@ -15,14 +15,14 @@ post '/games' do
   game = Game.create(player1: player1, player2: player2)
   #Game.create(player1_id: player1.id) alternative 
 
-  redirect to "/games/#{game.id}/?player=#{player1.name}&player2=#{player2.name}"
+  redirect to "/games/#{game.id}/?player1=#{player1.name}&player2=#{player2.name}"
 end 
 
 get '/games/:game_id/' do
   erb :game
 end 
 
-put '/games/:game_id' do 
+put '/games/:game_id/' do 
   #update game with winner 
   thegame = Game.find(params[:game_id])
 
