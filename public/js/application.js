@@ -1,4 +1,9 @@
 $(document).ready(function() {
+//Tara has commented on what needs to be fixed to make this more object-oriented.
+//the comments are the first thing in the function.  
+//Tara's self-evaluation: I understand the basic concepts of object oriented javascript
+//  I also can recofnize at a basic level what is wrong with my code and how to refactor it better
+//  Need to not be sick so that I actually have energy to refactor.  
  
 
   var QueryString = function () {
@@ -48,6 +53,10 @@ $(document).ready(function() {
   });
 
   function raceTheCars(event){
+    //display code not separated from game logic.  
+    //Fix: add a position attribute to player each player. Add track length to game.  
+    //   This will permit the race the cars method to have just logic
+    //   Then we can use that data to add a separate display method. 
     for (var i = 0; i < players.length; i++){
       if(event.keyCode === players[i].key){
         jquery_selector = '#player' + (i + 1) +'_strip td.active'; 
@@ -56,6 +65,8 @@ $(document).ready(function() {
     }
 
     if ( somebodyWon() ){
+      //display code not separated from game logic
+      //see fix for RaceTheCars to fix this one.  
       current_game.state = 'over';
       $.post(window.location.pathname, {winner: current_game.winner, _method: "put"});
       $('#game_over').css("visibility", "visible");
@@ -63,6 +74,9 @@ $(document).ready(function() {
   }
 
   function somebodyWon(){
+    //using display to determine if someobody has won. This function is 
+    //highly coupled to how I display the race.  See raceTheCars comment for 
+    //how to fix this. 
 
     for (var i=0; i < players.length; i++){
       jquery_selector = '#player' + (i + 1) +'_strip td';
@@ -75,6 +89,8 @@ $(document).ready(function() {
   }
 
   function declareWinner(the_winner){
+    //this is the only logic function that is not highly-coupled 
+    //to the window.  yay.  
     current_game.winner = the_winner;
   }
 
