@@ -25,14 +25,10 @@ $(document).ready(function() {
     return query_string;
 } ();
 
-  console.log(QueryString.player1);
-  console.log(QueryString.player2);
-
+  //game state
   current_game = new Game()
   player1 = new Player(QueryString.player1, 65);
   player2 = new Player(QueryString.player2, 76);
-
-
   players = [player1, player2];
 
   function Game (){
@@ -55,18 +51,14 @@ $(document).ready(function() {
     for (var i = 0; i < players.length; i++){
       if(event.keyCode === players[i].key){
         jquery_selector = '#player' + (i + 1) +'_strip td.active'; 
-        console.log(jquery_selector);
         $(jquery_selector).next().addClass('active');
       }
     }
 
     if ( somebodyWon() ){
       current_game.state = 'over';
-
       $.post(window.location.pathname, {winner: current_game.winner, _method: "put"});
-
       $('#game_over').css("visibility", "visible");
-
     }
   }
 
@@ -75,7 +67,7 @@ $(document).ready(function() {
     for (var i=0; i < players.length; i++){
       jquery_selector = '#player' + (i + 1) +'_strip td';
       if ( $(jquery_selector).last().hasClass('active')){
-        declareWinner('player1');
+        declareWinner('player' + (i + 1) );
       return true;
       }
     }
