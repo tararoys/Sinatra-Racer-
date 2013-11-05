@@ -29,16 +29,17 @@ $(document).ready(function() {
   console.log(QueryString.player2);
 
   current_game = new Game()
-  player1 = new Player(QueryString.player1);
-  player2 = new Player(QueryString.player2);
+  player1 = new Player(QueryString.player1, 65);
+  player2 = new Player(QueryString.player2, 76);
 
   function Game (){
     this.state = 'running';
     this.winner = 'nobody_yet';
   }
 
-  function Player(name){
+  function Player(name, key_to_press){
     this.name = name;
+    this.key = key_to_press; 
   }
 
 
@@ -52,10 +53,10 @@ $(document).ready(function() {
   });
 
   function raceTheCars(event){
-    if (event.keyCode === 65){
+    if (event.keyCode === player1.key){
       $('#player1_strip td.active').next().addClass('active');
     }
-    else if (event.keyCode === 76){
+    else if (event.keyCode === player2.key){
       $('#player2_strip td.active').next().addClass('active');
     };
 
