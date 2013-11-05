@@ -11,21 +11,6 @@ $(document).ready(function() {
   }
 
 
-  //var game = 'running';
-  //var winner = 'nobody_yet';
-
-
-
-  // $("#new_game").on('click', function(){
-  //   game = 'running';
-  //   winner = 'nobody_yet';
-  //   $('td').removeClass('active');
-  //   $('#player1_strip td').first().addClass('active');
-  //   $('#player2_strip td').first().addClass('active');
-  //   $('#game_over').css("visibility", "hidden");
-  //   $.get("/games/new");
-  // });
-
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   $(document).on('keyup', function(event) {
     if (current_game.state === 'running'){
